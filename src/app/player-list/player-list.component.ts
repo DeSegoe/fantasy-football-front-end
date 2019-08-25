@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { IPlayerDetailsService } from '../iplayer-details-service';
+import { Observable } from 'rxjs';
+import { PlayerDetails } from '../player-details';
+import { PlayerDetailsService } from '../player-details.service';
 
 @Component({
   selector: 'app-player-list',
@@ -7,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayerListComponent implements OnInit {
 
-  constructor() { }
+  players: Observable<PlayerDetails[]>;
+
+  constructor(private playerService: PlayerDetailsService) { }
 
   ngOnInit() {
+    this.players = this.playerService.getPlayers();
   }
 
 }

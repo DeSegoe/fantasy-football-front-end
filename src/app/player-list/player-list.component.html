@@ -1,1 +1,21 @@
-<p>player-list works!</p>
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+
+        <th>
+            <div class="tooltip">PPG
+                <span class="tooltiptext">Points per game</span>
+            </div>
+        </th>
+    </tr>
+    <tr p *ngFor="let item of players|async">
+        <td>
+            {{item.firstName}} {{item.secondName}}
+        </td>
+        <td>
+            {{item.pointsPerGame}}
+        </td>
+    </tr>
+</table>

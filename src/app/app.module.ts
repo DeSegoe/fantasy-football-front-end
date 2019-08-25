@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { PlayerListComponent } from './player-list/player-list.component';
 import { PlayerViewComponent } from './player-view/player-view.component';
 import { PitchViewComponent } from './pitch-view/pitch-view.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PlayerListComponent,
     PlayerViewComponent,
-    PitchViewComponent
+    PitchViewComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
