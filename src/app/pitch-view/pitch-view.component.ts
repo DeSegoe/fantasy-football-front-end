@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PlayerDetailsService } from '../player-details.service';
 
 @Component({
   selector: 'app-pitch-view',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PitchViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(private playerService: PlayerDetailsService) { }
 
   ngOnInit() {
   }
