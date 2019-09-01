@@ -1,52 +1,16 @@
-div {
+.pitch {
+    background: url('https://segoo-inc-fantasy-football.s3.us-east-2.amazonaws.com/images/Soccer_Field_Transparant.svg') no-repeat;
+    background-size: 100%;
+    width: 750px;
+    height: 960px;
+    margin:auto;
     margin-top:20px;
-    position: relative;
-}
-
-.soccer-pitch {
-    position: absolute;
-    top:0px;
-    left:0px;
-    z-index: 1;
 }
 
 .zone {
-    position: absolute;
-    z-index: 2;
+    float:left;
 }
 
-.col-1 {
-    left:0px;
-}
-
-.col-2 {
-    left:150px;
-}
-
-.col-3 {
-    left:300px;
-}
-
-.col-4 {
-    left:450px;
-}
-
-.col-5 {
-    left:600px;
-}
-
-.row-1 {
-    top:0px;
-}
-
-.row-2 {
-    top:240px;
-}
-
-.row-3 {
-    top:480px;
-}
-
-.row-4 {
-    top:720px;
+.pitch-row {
+    clear:both;
 }

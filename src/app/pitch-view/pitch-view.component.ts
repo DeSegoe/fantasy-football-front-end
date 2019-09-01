@@ -19,11 +19,13 @@ export class PitchViewComponent implements OnInit {
   constructor(private playerService: PlayerDetailsService) { }
 
   ngOnInit() {
+    this.positionedPlayer = [];
+
     this.playerService.getPlayers().subscribe(data => {
       this.formation = Formations.FourFourTwo;
       this.sortAttributes = SortAttributes.TotalPoints;
       this.firstEleven = this.playerService.generateTeam(this.formation, this.sortAttributes);
-      this.positionedPlayer = [];
+      this.positionedPlayer = []; 
       //initialize grid
       for (let i = 0; i < 5; i++) {
         this.positionedPlayer[i] = [];
