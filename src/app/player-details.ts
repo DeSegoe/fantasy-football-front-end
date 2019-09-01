@@ -1,3 +1,5 @@
+import { TeamDetails } from './team-details';
+
 export class PlayerDetails {
     chanceOfPlayingNextRound: number;
     chanceOfPlayingThisRound: number;
@@ -52,4 +54,5 @@ export class PlayerDetails {
     creativity: string;
     threat: string;
     ictIndex: string;
+    teamSummary: TeamDetails;
 }

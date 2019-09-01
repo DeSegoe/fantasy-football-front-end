@@ -1,0 +1,10 @@
+<div *ngIf="player">
+    <img width="150" height="200"
+        [src]="getPicture()">
+    <div>
+        {{player.firstName}} {{player.secondName}}
+    </div>
+    <div>
+        {{player.teamSummary.name}}
+    </div>
+</div>

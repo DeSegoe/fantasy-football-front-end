@@ -8,6 +8,7 @@ import { PlayerListComponent } from './player-list/player-list.component';
 import { PlayerViewComponent } from './player-view/player-view.component';
 import { PitchViewComponent } from './pitch-view/pitch-view.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { PlayerCardComponent } from './player-card/player-card.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     PlayerListComponent,
     PlayerViewComponent,
     PitchViewComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PlayerCardComponent
   ],
   imports: [
     BrowserModule,
