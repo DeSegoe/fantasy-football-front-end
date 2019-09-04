@@ -1,4 +1,6 @@
 export enum Formations {
-    FourFourTwo = "0",
-    FourThreeThree = "1"
+    FourFourTwo = "four four two",
+    FourThreeThree = "four three three",
+    ThreeFourThree = "three four three",
+    ThreeFiveTwo = "three five two"
 }

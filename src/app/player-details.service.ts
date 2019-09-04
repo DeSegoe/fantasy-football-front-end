@@ -48,6 +48,42 @@ export class PlayerDetailsService {
       firstElevent.attackers = attackers;
       return firstElevent;
     }
+    else if (formation == Formations.FourThreeThree) {
+      let goalKeeper = myClonedArray.find(item => item.elementType == 1);
+      let defenders = myClonedArray.filter(item => item.elementType == 2).slice(0, 4);
+      let midfielders = myClonedArray.filter(item => item.elementType == 3).slice(0, 3);
+      let attackers = myClonedArray.filter(item => item.elementType == 4).slice(0, 3);
+      let firstElevent = new FirstEleven();
+      firstElevent.goalKeeper = goalKeeper;
+      firstElevent.midfielders = midfielders;
+      firstElevent.defenders = defenders;
+      firstElevent.attackers = attackers;
+      return firstElevent;
+    }
+    else if (formation == Formations.ThreeFiveTwo) {
+      let goalKeeper = myClonedArray.find(item => item.elementType == 1);
+      let defenders = myClonedArray.filter(item => item.elementType == 2).slice(0, 3);
+      let midfielders = myClonedArray.filter(item => item.elementType == 3).slice(0, 5);
+      let attackers = myClonedArray.filter(item => item.elementType == 4).slice(0, 2);
+      let firstElevent = new FirstEleven();
+      firstElevent.goalKeeper = goalKeeper;
+      firstElevent.midfielders = midfielders;
+      firstElevent.defenders = defenders;
+      firstElevent.attackers = attackers;
+      return firstElevent;
+    }
+    else if (formation == Formations.ThreeFourThree) {
+      let goalKeeper = myClonedArray.find(item => item.elementType == 1);
+      let defenders = myClonedArray.filter(item => item.elementType == 2).slice(0, 3);
+      let midfielders = myClonedArray.filter(item => item.elementType == 3).slice(0, 4);
+      let attackers = myClonedArray.filter(item => item.elementType == 4).slice(0, 3);
+      let firstElevent = new FirstEleven();
+      firstElevent.goalKeeper = goalKeeper;
+      firstElevent.midfielders = midfielders;
+      firstElevent.defenders = defenders;
+      firstElevent.attackers = attackers;
+      return firstElevent;
+    }
 
     return null;
   }

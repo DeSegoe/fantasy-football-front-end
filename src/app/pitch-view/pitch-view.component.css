@@ -1,16 +1,33 @@
+.pitch-overview {
+    margin: auto;
+    margin-top: 20px;
+}
+
 .pitch {
     background: url('https://segoo-inc-fantasy-football.s3.us-east-2.amazonaws.com/images/Soccer_Field_Transparant.svg') no-repeat;
     background-size: 100%;
     width: 750px;
     height: 960px;
-    margin:auto;
-    margin-top:20px;
+    margin: auto;
+    margin-top: 20px;
 }
 
 .zone {
-    float:left;
+    float: left;
 }
 
 .pitch-row {
-    clear:both;
+    clear: both;
+}
+
+.formations {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    margin:auto;
+    width: 750px;
+    cursor: pointer;
 }

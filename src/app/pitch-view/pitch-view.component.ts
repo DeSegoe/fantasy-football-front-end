@@ -11,6 +11,8 @@ import { PlayerDetails } from '../player-details';
   styleUrls: ['./pitch-view.component.css']
 })
 export class PitchViewComponent implements OnInit {
+  private formationsList: { count: number, formations: Formations[] };
+
   private formation: Formations;
   private sortAttributes: SortAttributes;
   private firstEleven: FirstEleven;
@@ -19,28 +21,36 @@ export class PitchViewComponent implements OnInit {
   constructor(private playerService: PlayerDetailsService) { }
 
   ngOnInit() {
+    this.formationsList = { count: 0, formations: [Formations.FourFourTwo, Formations.FourThreeThree, Formations.ThreeFiveTwo, Formations.ThreeFourThree] };
     this.positionedPlayer = [];
 
     this.playerService.getPlayers().subscribe(data => {
       this.formation = Formations.FourFourTwo;
       this.sortAttributes = SortAttributes.TotalPoints;
       this.firstEleven = this.playerService.generateTeam(this.formation, this.sortAttributes);
-      this.positionedPlayer = []; 
-      //initialize grid
-      for (let i = 0; i < 5; i++) {
-        this.positionedPlayer[i] = [];
-        for (let j = 0; j < 5; j++) {
-          this.positionedPlayer[i][j] = null;
-        }
-      }
-
       this.populateGrid();
     });
+  }
 
+  private initializePlayerGrid() {
+    this.positionedPlayer = [];
+    //initialize grid
+    for (let i = 0; i < 5; i++) {
+      this.positionedPlayer[i] = [];
+      for (let j = 0; j < 5; j++) {
+        this.positionedPlayer[i][j] = null;
+      }
+    }
+  }
 
+  private cycleThroughFormations() {
+    this.formationsList.count++;
+    this.formation = this.formationsList.formations[this.formationsList.count%this.formationsList.formations.length];
+    this.populateGrid();
   }
 
   private populateGrid() {
+    this.initializePlayerGrid();
     this.firstEleven = this.playerService.generateTeam(this.formation, this.sortAttributes);
     this.positionedPlayer[0][2] = this.firstEleven.goalKeeper;
     this.populateHelper(1, this.firstEleven.defenders);
