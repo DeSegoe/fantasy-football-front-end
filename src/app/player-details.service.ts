@@ -32,10 +32,8 @@ export class PlayerDetailsService {
     let myClonedArray: PlayerDetails[] = [];
     this.players.forEach(item => myClonedArray.push(item));
 
-    if (sortAttribute == SortAttributes.TotalPoints) {
-      myClonedArray.sort((a, b) => b.totalPoints - a.totalPoints);
-    }
-
+    myClonedArray.sort(sortAttribute.sort);
+    
     if (formation == Formations.FourFourTwo) {
       let goalKeeper = myClonedArray.find(item => item.elementType == 1);
       let defenders = myClonedArray.filter(item => item.elementType == 2).slice(0, 4);

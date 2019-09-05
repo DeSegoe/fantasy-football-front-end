@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerDetailsService } from '../player-details.service';
 import { Formations } from '../formations';
-import { SortAttributes } from '../sort-attribute';
+import { SortAttributes, TotalPoints, TotalPointsEvent, Cost, CostChange, CostChangeEvent, SelectedBy, PPG } from '../sort-attribute';
 import { FirstEleven } from '../first-eleven';
 import { PlayerDetails } from '../player-details';
 
@@ -12,9 +12,10 @@ import { PlayerDetails } from '../player-details';
 })
 export class PitchViewComponent implements OnInit {
   private formationsList: { count: number, formations: Formations[] };
+  private sortCriteriaList: { count: number, sorter: SortAttributes[] };
 
   private formation: Formations;
-  private sortAttributes: SortAttributes;
+  private sortAttribute: SortAttributes;
   private firstEleven: FirstEleven;
   private positionedPlayer: PlayerDetails[][];
 
@@ -22,12 +23,13 @@ export class PitchViewComponent implements OnInit {
 
   ngOnInit() {
     this.formationsList = { count: 0, formations: [Formations.FourFourTwo, Formations.FourThreeThree, Formations.ThreeFiveTwo, Formations.ThreeFourThree] };
-    this.positionedPlayer = [];
+    this.sortCriteriaList = {count: 0, sorter: [TotalPoints, TotalPointsEvent, Cost, CostChange, CostChangeEvent, SelectedBy, PPG]};
+    this.initializePlayerGrid();
 
     this.playerService.getPlayers().subscribe(data => {
       this.formation = Formations.FourFourTwo;
-      this.sortAttributes = SortAttributes.TotalPoints;
-      this.firstEleven = this.playerService.generateTeam(this.formation, this.sortAttributes);
+      this.sortAttribute = TotalPoints;
+      this.firstEleven = this.playerService.generateTeam(this.formation, this.sortAttribute);
       this.populateGrid();
     });
   }
@@ -49,9 +51,15 @@ export class PitchViewComponent implements OnInit {
     this.populateGrid();
   }
 
+  private cycleThroughSortStrategies() {
+    this.sortCriteriaList.count++;
+    this.sortAttribute = this.sortCriteriaList.sorter[this.sortCriteriaList.count%this.sortCriteriaList.sorter.length];
+    this.populateGrid();
+  }
+
   private populateGrid() {
     this.initializePlayerGrid();
-    this.firstEleven = this.playerService.generateTeam(this.formation, this.sortAttributes);
+    this.firstEleven = this.playerService.generateTeam(this.formation, this.sortAttribute);
     this.positionedPlayer[0][2] = this.firstEleven.goalKeeper;
     this.populateHelper(1, this.firstEleven.defenders);
     this.populateHelper(2, this.firstEleven.midfielders);
