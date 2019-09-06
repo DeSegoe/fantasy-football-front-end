@@ -1,29 +1,19 @@
-<table>
+<table matSort (matSortChange)="sortData($event)">
     <tr>
-        <th>
-            Name
-        </th>
-
-        <th>
-            <div class="tooltip">PPG
-                <span class="tooltiptext">Points per game</span>
-            </div>
-        </th>
-
-        <th>
-            Team
-        </th>
+        <th mat-sort-header="name">Name</th>
+        <th mat-sort-header="team">Team</th>
+        <th mat-sort-header="ppg">PPG</th>
+        <th mat-sort-header="points">Total Points</th>
+        <th mat-sort-header="eventPoints">Gameweek points</th>
+        <th mat-sort-header="cost">Cost</th>
     </tr>
-    <tr p *ngFor="let item of players">
-        <td>
-            {{item.firstName}} {{item.secondName}}
-        </td>
-        <td>
-            {{item.pointsPerGame}}
-        </td>
 
-        <td *ngIf="item.teamSummary">
-            {{item.teamSummary.name}}
-        </td>
+    <tr *ngFor="let item of players">
+        <td class="text">{{item.firstName}} {{item.secondName}}</td>
+        <td class="text">{{item.teamSummary.name}}</td>
+        <td>{{item.pointsPerGame}}</td>
+        <td>{{item.totalPoints}}</td>
+        <td>{{item.eventPoints}}</td>
+        <td>{{item.nowCost}}</td>
     </tr>
 </table>

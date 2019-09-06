@@ -32,3 +32,11 @@ table {
   .tooltip:hover .tooltiptext {
     visibility: visible;
   }
+
+  .mat-sort-header-container {
+    align-items: center;
+  }  
+
+  td.text {
+    text-align: left;
+  }

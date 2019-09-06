@@ -9,6 +9,7 @@ import { PlayerViewComponent } from './player-view/player-view.component';
 import { PitchViewComponent } from './pitch-view/pitch-view.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PlayerCardComponent } from './player-card/player-card.component';
+import { MaterialModule } from './material/material.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { PlayerCardComponent } from './player-card/player-card.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MaterialModule,
     HttpClientModule
   ],
   providers: [],
