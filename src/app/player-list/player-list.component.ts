@@ -9,6 +9,7 @@ import { Sort } from '@angular/material/sort';
   styleUrls: ['./player-list.component.css']
 })
 export class PlayerListComponent implements OnInit {
+  private filterValue: string;
   private players: PlayerDetails[];
 
   constructor(private playerService: PlayerDetailsService) { }
@@ -29,6 +30,7 @@ export class PlayerListComponent implements OnInit {
       switch (sort.active) {
         case 'name': return compare(a.secondName, b.secondName, isAsc);
         case 'team': return compare(a.teamSummary.name, b.teamSummary.name, isAsc);
+        case 'position': return compare(a.elementType, b.elementType, isAsc);
         case 'ppg': return compare(a.pointsPerGame, b.pointsPerGame, isAsc);
         case 'points': return compare(a.totalPoints, b.totalPoints, isAsc);
         case 'eventPoints': return compare(a.eventPoints, b.eventPoints, isAsc);
@@ -41,10 +43,19 @@ export class PlayerListComponent implements OnInit {
     });
   }
 
+  position(player: PlayerDetails): string {
+    switch (player.elementType) {
+      case 1: return "Goalkeeper";
+      case 2: return "Defender";
+      case 3: return "Midfielder";
+      default: return "Attacker";
+    }
+  }
+
   costChange(player: PlayerDetails): number {
     let originalCost = player.nowCost - player.costChangeStart;
     if (originalCost > 0)
-      return 100*(player.nowCost - originalCost) / originalCost;
+      return 100 * (player.nowCost - originalCost) / originalCost;
     return 0;
   };
 

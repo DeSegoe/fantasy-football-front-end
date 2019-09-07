@@ -1,25 +1,34 @@
-<table matSort (matSortChange)="sortData($event)">
-    <tr>
-        <th mat-sort-header="name">Name</th>
-        <th mat-sort-header="team">Team</th>
-        <th mat-sort-header="ppg">PPG</th>
-        <th mat-sort-header="points">Season Points</th>
-        <th mat-sort-header="eventPoints">Week points</th>
-        <th mat-sort-header="cost">Cost</th>
-        <th mat-sort-header="selectedBy">Selected By</th>
-        <th mat-sort-header="costChange">Cost Change</th>
-        <th mat-sort-header="transferChange">Transfer In/Out</th>
-    </tr>
+<div class="list-view">
+    
+    <div class="list-view-form">
+        <input placeholder="Player Filter" [(ngModel)]="filterValue">
+    </div>
 
-    <tr *ngFor="let item of players">
-        <td class="text">{{item.firstName}} {{item.secondName}}</td>
-        <td class="text">{{item.teamSummary.name}}</td>
-        <td>{{item.pointsPerGame}}</td>
-        <td>{{item.totalPoints}}</td>
-        <td>{{item.eventPoints}}</td>
-        <td>{{item.nowCost}}</td>
-        <td>{{item.selectedByPercent}} %</td>
-        <td>{{costChange(item) | number:'1.1-3'}} %</td>
-        <td>{{selectionChange(item) | number:'1.1-3'}}</td>
-    </tr>
-</table>
+    <table matSort (matSortChange)="sortData($event)">
+        <tr>
+            <th mat-sort-header="name">Name</th>
+            <th mat-sort-header="team">Team</th>
+            <th mat-sort-header="position">Defender</th>
+            <th mat-sort-header="ppg">PPG</th>
+            <th mat-sort-header="points">Season Points</th>
+            <th mat-sort-header="eventPoints">Week points</th>
+            <th mat-sort-header="cost">Cost</th>
+            <th mat-sort-header="selectedBy">Selected By</th>
+            <th mat-sort-header="costChange">Cost Change</th>
+            <th mat-sort-header="transferChange">Transfer In/Out</th>
+        </tr>
+
+        <tr *ngFor="let item of players | playerFilter : filterValue">
+            <td class="text">{{item.firstName}} {{item.secondName}}</td>
+            <td class="text">{{item.teamSummary.name}}</td>
+            <td class="text">{{position(item)}}</td>
+            <td>{{item.pointsPerGame}}</td>
+            <td>{{item.totalPoints}}</td>
+            <td>{{item.eventPoints}}</td>
+            <td>{{item.nowCost}}</td>
+            <td>{{item.selectedByPercent}} %</td>
+            <td>{{costChange(item) | number:'1.1-3'}} %</td>
+            <td>{{selectionChange(item) | number:'1.1-3'}}</td>
+        </tr>
+    </table>
+</div>

@@ -12,6 +12,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { PlayerCardComponent } from './player-card/player-card.component';
 import { MaterialModule } from './material/material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { PlayerFilterPipe } from './player-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     PlayerViewComponent,
     PitchViewComponent,
     PageNotFoundComponent,
-    PlayerCardComponent
+    PlayerCardComponent,
+    PlayerFilterPipe
   ],
   imports: [
     BrowserModule,
