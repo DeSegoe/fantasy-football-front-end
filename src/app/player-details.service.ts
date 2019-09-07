@@ -28,17 +28,24 @@ export class PlayerDetailsService {
     return httpObservable;
   }
 
-  generateTeam(formation: Formations, sortAttribute: SortAttributes): FirstEleven {
+  generateTeam(formation: Formations, sortAttribute: SortAttributes,selectedTeam?:string): FirstEleven {
+    
+    if (!selectedTeam)
+      selectedTeam = "NONE";
+
+    let filterByTeam = (player:PlayerDetails)=> selectedTeam ==="NONE" || player.teamSummary.name === selectedTeam;
+
+    
     let myClonedArray: PlayerDetails[] = [];
     this.players.forEach(item => myClonedArray.push(item));
 
     myClonedArray.sort(sortAttribute.sort);
     
     if (formation == Formations.FourFourTwo) {
-      let goalKeeper = myClonedArray.find(item => item.elementType == 1);
-      let defenders = myClonedArray.filter(item => item.elementType == 2).slice(0, 4);
-      let midfielders = myClonedArray.filter(item => item.elementType == 3).slice(0, 4);
-      let attackers = myClonedArray.filter(item => item.elementType == 4).slice(0, 2);
+      let goalKeeper = myClonedArray.filter(filterByTeam).find(item => item.elementType == 1);
+      let defenders = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 2).slice(0, 4);
+      let midfielders = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 3).slice(0, 4);
+      let attackers = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 4).slice(0, 2);
       let firstElevent = new FirstEleven();
       firstElevent.goalKeeper = goalKeeper;
       firstElevent.midfielders = midfielders;
@@ -47,10 +54,10 @@ export class PlayerDetailsService {
       return firstElevent;
     }
     else if (formation == Formations.FourThreeThree) {
-      let goalKeeper = myClonedArray.find(item => item.elementType == 1);
-      let defenders = myClonedArray.filter(item => item.elementType == 2).slice(0, 4);
-      let midfielders = myClonedArray.filter(item => item.elementType == 3).slice(0, 3);
-      let attackers = myClonedArray.filter(item => item.elementType == 4).slice(0, 3);
+      let goalKeeper = myClonedArray.filter(filterByTeam).find(item => item.elementType == 1);
+      let defenders = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 2).slice(0, 4);
+      let midfielders = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 3).slice(0, 3);
+      let attackers = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 4).slice(0, 3);
       let firstElevent = new FirstEleven();
       firstElevent.goalKeeper = goalKeeper;
       firstElevent.midfielders = midfielders;
@@ -59,10 +66,10 @@ export class PlayerDetailsService {
       return firstElevent;
     }
     else if (formation == Formations.ThreeFiveTwo) {
-      let goalKeeper = myClonedArray.find(item => item.elementType == 1);
-      let defenders = myClonedArray.filter(item => item.elementType == 2).slice(0, 3);
-      let midfielders = myClonedArray.filter(item => item.elementType == 3).slice(0, 5);
-      let attackers = myClonedArray.filter(item => item.elementType == 4).slice(0, 2);
+      let goalKeeper = myClonedArray.filter(filterByTeam).find(item => item.elementType == 1);
+      let defenders = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 2).slice(0, 3);
+      let midfielders = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 3).slice(0, 5);
+      let attackers = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 4).slice(0, 2);
       let firstElevent = new FirstEleven();
       firstElevent.goalKeeper = goalKeeper;
       firstElevent.midfielders = midfielders;
@@ -71,10 +78,22 @@ export class PlayerDetailsService {
       return firstElevent;
     }
     else if (formation == Formations.ThreeFourThree) {
-      let goalKeeper = myClonedArray.find(item => item.elementType == 1);
-      let defenders = myClonedArray.filter(item => item.elementType == 2).slice(0, 3);
-      let midfielders = myClonedArray.filter(item => item.elementType == 3).slice(0, 4);
-      let attackers = myClonedArray.filter(item => item.elementType == 4).slice(0, 3);
+      let goalKeeper = myClonedArray.filter(filterByTeam).find(item => item.elementType == 1);
+      let defenders = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 2).slice(0, 3);
+      let midfielders = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 3).slice(0, 4);
+      let attackers = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 4).slice(0, 3);
+      let firstElevent = new FirstEleven();
+      firstElevent.goalKeeper = goalKeeper;
+      firstElevent.midfielders = midfielders;
+      firstElevent.defenders = defenders;
+      firstElevent.attackers = attackers;
+      return firstElevent;
+    }
+    else if (formation == Formations.FourFiveOne) {
+      let goalKeeper = myClonedArray.filter(filterByTeam).find(item => item.elementType == 1);
+      let defenders = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 2).slice(0, 4);
+      let midfielders = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 3).slice(0, 5);
+      let attackers = myClonedArray.filter(filterByTeam).filter(item => item.elementType == 4).slice(0, 1);
       let firstElevent = new FirstEleven();
       firstElevent.goalKeeper = goalKeeper;
       firstElevent.midfielders = midfielders;

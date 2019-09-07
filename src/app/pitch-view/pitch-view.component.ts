@@ -4,6 +4,9 @@ import { Formations } from '../formations';
 import { SortAttributes, TotalPoints, TotalPointsEvent, Cost, CostChange, CostChangeEvent, SelectedBy, PPG } from '../sort-attribute';
 import { FirstEleven } from '../first-eleven';
 import { PlayerDetails } from '../player-details';
+import { TeamService } from '../team.service';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pitch-view',
@@ -18,20 +21,24 @@ export class PitchViewComponent implements OnInit {
   private sortAttribute: SortAttributes;
   private firstEleven: FirstEleven;
   private positionedPlayer: PlayerDetails[][];
+  private teams: Observable<String[]>;
+  private selectedTeam: string;
 
-  constructor(private playerService: PlayerDetailsService) { }
+  constructor(private playerService: PlayerDetailsService, private teamService: TeamService) { }
 
   ngOnInit() {
-    this.formationsList = { count: 0, formations: [Formations.FourFourTwo, Formations.FourThreeThree, Formations.ThreeFiveTwo, Formations.ThreeFourThree] };
+    this.formationsList = { count: 0, formations: [Formations.FourFourTwo, Formations.FourThreeThree, Formations.ThreeFiveTwo, Formations.ThreeFourThree, Formations.FourFiveOne] };
     this.sortCriteriaList = {count: 0, sorter: [TotalPoints, TotalPointsEvent, Cost, CostChange, CostChangeEvent, SelectedBy, PPG]};
+    this.formation = Formations.FourFourTwo;
+    this.sortAttribute = TotalPoints;
     this.initializePlayerGrid();
+    this.selectedTeam = "NONE";
 
     this.playerService.getPlayers().subscribe(data => {
-      this.formation = Formations.FourFourTwo;
-      this.sortAttribute = TotalPoints;
-      this.firstEleven = this.playerService.generateTeam(this.formation, this.sortAttribute);
       this.populateGrid();
     });
+
+    this.teams = this.teamService.getTeams().pipe(map(team=>team.map(teamObject=>teamObject.name)));
   }
 
   private initializePlayerGrid() {
@@ -59,12 +66,11 @@ export class PitchViewComponent implements OnInit {
 
   private populateGrid() {
     this.initializePlayerGrid();
-    this.firstEleven = this.playerService.generateTeam(this.formation, this.sortAttribute);
+    this.firstEleven = this.playerService.generateTeam(this.formation, this.sortAttribute, this.selectedTeam);
     this.positionedPlayer[0][2] = this.firstEleven.goalKeeper;
     this.populateHelper(1, this.firstEleven.defenders);
     this.populateHelper(2, this.firstEleven.midfielders);
     this.populateHelper(3, this.firstEleven.attackers);
-    console.log(this.firstEleven);
   }
 
   private populateHelper(row: number, players: PlayerDetails[]) {
@@ -90,6 +96,12 @@ export class PitchViewComponent implements OnInit {
       this.positionedPlayer[row][1] = players[0];
       this.positionedPlayer[row][3] = players[1];
     }
+    else if (players.length == 1) {
+      this.positionedPlayer[row][2] = players[0];
+    }
   }
 
+  onTeamSelection(event) {
+    this.populateGrid();
+  }
 }

@@ -33,9 +33,25 @@ export class PlayerListComponent implements OnInit {
         case 'points': return compare(a.totalPoints, b.totalPoints, isAsc);
         case 'eventPoints': return compare(a.eventPoints, b.eventPoints, isAsc);
         case 'cost': return compare(a.nowCost, b.nowCost, isAsc);
+        case 'selectedBy': return compare(parseFloat(a.selectedByPercent), parseFloat(b.selectedByPercent), isAsc);
+        case 'costChange': return compare(this.costChange(a), this.costChange(b), isAsc);
+        case 'transferChange': return compare(this.selectionChange(a), this.selectionChange(b), isAsc);
         default: return 0;
       }
     });
+  }
+
+  costChange(player: PlayerDetails): number {
+    let originalCost = player.nowCost - player.costChangeStart;
+    if (originalCost > 0)
+      return 100*(player.nowCost - originalCost) / originalCost;
+    return 0;
+  };
+
+  selectionChange(player: PlayerDetails): number {
+    if (player.transfersOut > 0)
+      return player.transfersIn / player.transfersOut;
+    return 0;
   }
 }
 
