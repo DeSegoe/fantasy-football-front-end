@@ -13,6 +13,7 @@ import { PlayerCardComponent } from './player-card/player-card.component';
 import { MaterialModule } from './material/material.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PlayerFilterPipe } from './player-filter.pipe';
+import { FacebookLoginComponent } from './facebook-login/facebook-login.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PlayerFilterPipe } from './player-filter.pipe';
     PitchViewComponent,
     PageNotFoundComponent,
     PlayerCardComponent,
-    PlayerFilterPipe
+    PlayerFilterPipe,
+    FacebookLoginComponent
   ],
   imports: [
     BrowserModule,
