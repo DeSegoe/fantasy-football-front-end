@@ -23,6 +23,17 @@ export class FacebookLoginComponent implements OnInit {
 
       FB.AppEvents.logPageView();
 
+      FB.getLoginStatus(function (response) {
+        if (response.authResponse) {
+          //login success
+          //login success code here
+          //redirect to home page
+          if (this.sessionService.login(response)) {
+            this.router.navigateByUrl('/pitch');
+          }
+        }
+      });
+
     };
 
     (function (d, s, id) {
