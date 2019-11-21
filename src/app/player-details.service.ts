@@ -19,7 +19,7 @@ export class PlayerDetailsService {
     if (this.players)
       return of(this.players);
     let httpObservable =
-      this.http.get<PlayerDetails[]>('https://football.segoo-inc.com/v1/english-premier-league/players')
+      this.http.get<PlayerDetails[]>('https://football.segoo-inc.com/v1/query-epl-players')
         .pipe(map(data => data.filter(item => item.teamSummary).map(item => {
           item.photo = item.photo.replace(".jpg", "")
           return item;
